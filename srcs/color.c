@@ -23,11 +23,25 @@ t_color		color_from(unsigned char r, unsigned char g, unsigned char b)
 	return (color);
 }
 
+t_color		mixed_color(double proportion)
+{
+	t_color color;
+
+	proportion += 0.1;
+	color.r = 255 - (unsigned int)((proportion > 1) ? 1 : proportion *
+		255);
+	color.g = 255 - (unsigned int)((proportion > 1) ? 1 :
+		proportion * 255);
+	color.b = 255 - (unsigned int)((proportion > 1) ? 1 :
+		proportion * 255);
+	return (color);
+}
+
 int			endian_color(unsigned int r, unsigned g, unsigned int b)
 {
 	int			endian_color;
 
 	endian_color = 0;
-	endian_color = ((r & 0xFF) << 16) + ((g & 0xFF) << 8) + (b & 0xFF);
+	endian_color = ((b & 0xFF) << 16) + ((g & 0xFF) << 8) + (r & 0xFF);
 	return (endian_color);
 }

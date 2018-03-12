@@ -20,8 +20,9 @@ void					init_mandelbrot(t_env *env)
 	env->fractal.max_x = 0.6;
 	env->fractal.min_y = -1.2;
 	env->fractal.max_y = 1.2;
-	env->zoom = (double)(env->win_length / (env->fractal.max_x -
-				env->fractal.min_x));
+	env->zoom = (double)(env->win_length) / (double)(env->fractal.max_x -
+				env->fractal.min_x);
+	printf("Zoom = %f\n", env->zoom);
 }
 
 static int				iterate(double x, double y, t_env *env)
@@ -33,13 +34,13 @@ static int				iterate(double x, double y, t_env *env)
 
 	c.r = x / env->zoom + env->fractal.min_x;
 	c.i = y / env->zoom + env->fractal.min_y;
-	c.r = 0;
-	c.i = 0;
+	z.r = 0;
+	z.i = 0;
 	i = 0;
 	while (++i <= env->fractal.max_iteration)
 	{
 		tmp = z.r;
-		z.r = z.r * z.r + z.i * z.i + c.r;
+		z.r = z.r * z.r - z.i * z.i + c.r;
 		z.i = 2 * z.i * tmp + c.i;
 		if (z.r * z.r + z.i * z.i > 4)
 			return (i);
@@ -52,7 +53,7 @@ static unsigned int		blue(int iterations, t_env *env)
 	double		blue;
 
 	blue = ((double)(iterations) / (double)(env->fractal.max_iteration)
-		* (double)(env->fractal.max_iteration));
+		* (double)(255));
 	return ((unsigned int)blue);
 }
 
@@ -68,14 +69,12 @@ void				redraw_mandelbrot(t_env *env)
 		x = -1;
 		while (++x < env->win_length)
 		{
-			iterations = iterate((double)(x) / env->zoom + env->fractal.min_x,
-					(double)(y) / env->zoom + env->fractal.min_y, env);
+			iterations = iterate((double)(x), (double)(y), env);
 			if (iterations > env->fractal.max_iteration)
-				fill_pixel(env, x, y, color_from(255, 0, 0));
+				fill_pixel(env, x, y, color_from(255, 255, 255));
 			else
-			{
-				fill_pixel(env, x, y, color_from(0, 0, blue(iterations, env)));
-			}
+				fill_pixel(env, x, y, mixed_color((double)iterations /
+					(double)env->fractal.max_iteration));
 		}
 	}
 }

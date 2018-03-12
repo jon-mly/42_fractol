@@ -25,7 +25,7 @@
 ** MACROS
 */
 
-# define WIN_LENGTH 1600
+# define WIN_LENGTH 1200
 # define WIN_HEIGHT 1200
 
 /*
@@ -99,5 +99,6 @@ void		exit_normally(t_env *env);
 void				redraw_mandelbrot(t_env *env);
 void					init_mandelbrot(t_env *env);
 void		redraw_image(t_env *env);
+t_color		mixed_color(double proportion);
 
 #endif
