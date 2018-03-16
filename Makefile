@@ -6,7 +6,7 @@
 #    By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/01 14:51:15 by jmlynarc          #+#    #+#              #
-#    Updated: 2018/03/10 17:30:26 by jmlynarc         ###   ########.fr        #
+#    Updated: 2018/03/16 12:55:03 by jmlynarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ SRCS = $(SRCS_REP)color.c \
 	   $(SRCS_REP)keys_event.c \
 	   $(SRCS_REP)main.c \
 	   $(SRCS_REP)mandelbrot.c \
-	   $(SRCS_REP)graphic_manager.c
+	   $(SRCS_REP)graphic_manager.c \
+	   $(SRCS_REP)move_frame.c \
+	   $(SRCS_REP)zoom.c
 
 O_SRCS = $(SRCS:.c=.o)
 
@@ -34,11 +36,14 @@ W_FLAGS = -Wall -Werror -Wextra
 MLX_FLAGS = -I ~/Library -g -L ~/Library -lmlx -framework OpenGL -framework \
 			AppKit
 
+MULTITHREADING_FLAG = -lpthread
+
 MATH_FLAG = -lm
 
 $(NAME):
 	cd $(LIBFT_REP) && make
-	gcc $(INCLUDE_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(SRCS) $(LIBFT) -o $(NAME)
+	gcc $(INCLUDE_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(MULTITHREADING_FLAG) \
+		$(SRCS) $(LIBFT) -o $(NAME)
 
 all: $(NAME)
 

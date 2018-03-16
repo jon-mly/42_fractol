@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 15:01:30 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/03/10 17:44:46 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/03/16 16:09:28 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ int		deal_with_key(int key, void *param)
 	env = (t_env*)param;
 	if (key == 53)
 		exit_normally(env);
+	else if (key == 123 || key == 124 || key == 125 || key == 126 || key == 14
+			|| key == 12)
+		handle_key(key, env);
 	return (0);
 }
 
@@ -46,9 +49,8 @@ int		main(int ac, char** av)
 			"fractol");
 	env->win_length = WIN_LENGTH;
 	env->win_height = WIN_HEIGHT;
-	init_mandelbrot(env);
+	init_julia(env, 0.3, 0.5);
 	redraw_image(env);
-	ft_putendl("Is redrawn");
 	mlx_key_hook(env->win_ptr, deal_with_key, (void*)env);
 	mlx_loop(env->mlx_ptr);
 	return (0);

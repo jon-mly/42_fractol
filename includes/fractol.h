@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 14:51:21 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/03/10 17:30:58 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/03/16 16:09:04 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "mlx.h"
 # include "../libft/libft.h"
 # include <math.h>
+# include <pthread.h>
 
 /*
 ** MACROS
@@ -65,6 +66,8 @@ typedef struct	s_complex
 typedef struct	s_fractal
 {
 	t_fractal_type	type;
+	double			julia_x;
+	double			julia_y;
 	double			min_x;
 	double			max_x;
 	double			min_y;
@@ -88,6 +91,13 @@ typedef struct	s_env
 	t_fractal		fractal;
 }				t_env;
 
+typedef struct	s_thread_data
+{
+	int				y_min;
+	int				y_max;
+	t_env			*env;
+}				t_thread_data;
+
 /*
 ** PROTOTYPES
 */
@@ -100,5 +110,14 @@ void				redraw_mandelbrot(t_env *env);
 void					init_mandelbrot(t_env *env);
 void		redraw_image(t_env *env);
 t_color		mixed_color(double proportion);
+void		move_frame_left(t_env *env);
+void		move_frame_right(t_env *env);
+void		move_frame_up(t_env *env);
+void		move_frame_down(t_env *env);
+void		handle_key(int key, t_env *env);
+void		zoom_up(t_env *env);
+void		zoom_down(t_env *env);
+void		init_julia(t_env *env, double x, double y);
+void				redraw_julia(t_env *env);
 
 #endif

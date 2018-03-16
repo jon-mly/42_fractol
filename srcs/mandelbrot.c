@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 14:33:31 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/03/10 17:42:08 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/03/16 15:59:30 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void					init_mandelbrot(t_env *env)
 	env->fractal.max_y = 1.2;
 	env->zoom = (double)(env->win_length) / (double)(env->fractal.max_x -
 				env->fractal.min_x);
-	printf("Zoom = %f\n", env->zoom);
 }
 
 static int				iterate(double x, double y, t_env *env)
@@ -48,33 +47,64 @@ static int				iterate(double x, double y, t_env *env)
 	return (i);
 }
 
-static unsigned int		blue(int iterations, t_env *env)
+static void			*draw_lines(void *arg)
 {
-	double		blue;
-
-	blue = ((double)(iterations) / (double)(env->fractal.max_iteration)
-		* (double)(255));
-	return ((unsigned int)blue);
-}
-
-void				redraw_mandelbrot(t_env *env)
-{
+	t_thread_data	data;
 	int				x;
 	int				y;
 	int				iterations;
 
-	y = -1;
-	while (++y < env->win_height)
+	data = *((t_thread_data*)arg);
+	printf("Zoom : %f\n", data.env->zoom);
+	y = data.y_min - 1;
+	while (++y < data.y_max)
 	{
 		x = -1;
-		while (++x < env->win_length)
+		while (++x < data.env->win_length)
 		{
-			iterations = iterate((double)(x), (double)(y), env);
-			if (iterations > env->fractal.max_iteration)
-				fill_pixel(env, x, y, color_from(255, 255, 255));
+			iterations = iterate((double)(x), (double)(y), data.env);
+			if (iterations > data.env->fractal.max_iteration)
+				fill_pixel(data.env, x, y, color_from(255, 255, 255));
 			else
-				fill_pixel(env, x, y, mixed_color((double)iterations /
-					(double)env->fractal.max_iteration));
+				fill_pixel(data.env, x, y, mixed_color((double)iterations /
+					(double)data.env->fractal.max_iteration));
 		}
 	}
+	ft_memdel(&arg);
+	pthread_exit(NULL);
+	return (NULL);
+}
+
+static t_thread_data			*thread_data(t_env *env, int thread_rank,
+		int total_threads)
+{
+	t_thread_data	*data;
+
+	if (!(data = (t_thread_data*)malloc(sizeof(t_thread_data))))
+		exit_error(env);
+	data->env = env;
+	data->y_min = thread_rank * env->img_height / total_threads;
+	data->y_max = (thread_rank + 1) * env->img_height / total_threads;
+	return (data);
+}
+
+void				redraw_mandelbrot(t_env *env)
+{
+	pthread_t	thread_0;
+	pthread_t	thread_1;
+	pthread_t	thread_2;
+	pthread_t	thread_3;
+
+	if (pthread_create(&thread_0, NULL, draw_lines, (void*)(thread_data(env, 0, 4))))
+		exit_error(env);
+	if (pthread_create(&thread_1, NULL, draw_lines, (void*)(thread_data(env, 1, 4))))
+		exit_error(env);
+	if (pthread_create(&thread_2, NULL, draw_lines, (void*)(thread_data(env, 2, 4))))
+		exit_error(env);
+	if (pthread_create(&thread_3, NULL, draw_lines, (void*)(thread_data(env, 3, 4))))
+		exit_error(env);
+	pthread_join(thread_0, NULL);
+	pthread_join(thread_1, NULL);
+	pthread_join(thread_2, NULL);
+	pthread_join(thread_3, NULL);
 }

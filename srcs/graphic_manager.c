@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 17:25:05 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/03/10 17:43:24 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/03/16 16:09:51 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ void		redraw_image(t_env *env)
 	env->line_size = s_l / 4;
 	if (env->fractal.type == MANDELBROT)
 		redraw_mandelbrot(env);
+	else if (env->fractal.type == JULIA)
+		redraw_julia(env);
 	mlx_put_image_to_window((void *)env, env->win_ptr, env->img_ptr, 0, 0);
 }
