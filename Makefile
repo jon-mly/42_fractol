@@ -27,7 +27,8 @@ SRCS = $(SRCS_REP)color.c \
 	   $(SRCS_REP)mandelbrot.c \
 	   $(SRCS_REP)graphic_manager.c \
 	   $(SRCS_REP)move_frame.c \
-	   $(SRCS_REP)zoom.c
+	   $(SRCS_REP)zoom.c \
+	   $(SRCS_REP)burningship.c
 
 O_SRCS = $(SRCS:.c=.o)
 

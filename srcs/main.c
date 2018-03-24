@@ -49,7 +49,7 @@ int		main(int ac, char** av)
 			"fractol");
 	env->win_length = WIN_LENGTH;
 	env->win_height = WIN_HEIGHT;
-	init_julia(env, 0.3, 0.5);
+	init_burningship(env);
 	redraw_image(env);
 	mlx_key_hook(env->win_ptr, deal_with_key, (void*)env);
 	mlx_loop(env->mlx_ptr);

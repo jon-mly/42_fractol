@@ -36,7 +36,8 @@
 typedef enum	e_fractal_type
 {
 	JULIA,
-	MANDELBROT
+	MANDELBROT,
+	BURNINGSHIP
 }				t_fractal_type;
 
 /*
@@ -119,5 +120,7 @@ void		zoom_up(t_env *env);
 void		zoom_down(t_env *env);
 void		init_julia(t_env *env, double x, double y);
 void				redraw_julia(t_env *env);
+void					init_burningship(t_env *env);
+void				redraw_burningship(t_env *env);
 
 #endif

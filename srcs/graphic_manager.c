@@ -30,5 +30,7 @@ void		redraw_image(t_env *env)
 		redraw_mandelbrot(env);
 	else if (env->fractal.type == JULIA)
 		redraw_julia(env);
+	else if (env->fractal.type == BURNINGSHIP)
+		redraw_burningship(env);
 	mlx_put_image_to_window((void *)env, env->win_ptr, env->img_ptr, 0, 0);
 }
