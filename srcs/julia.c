@@ -22,6 +22,7 @@ void		init_julia(t_env *env, double x, double y)
 	env->fractal.max_y = 1.2;
 	env->fractal.julia_x = x;
 	env->fractal.julia_y = y;
+	env->fractal.julia_capture_mouse = 0;
 	env->zoom = (double)(env->win_length) / (double)(env->fractal.max_x -
 				env->fractal.min_x);
 }

@@ -28,6 +28,18 @@
 
 # define WIN_LENGTH 1200
 # define WIN_HEIGHT 1200
+# define KEY_ESC 53
+# define KEY_ARROW_UP 126
+# define KEY_ARROW_DOWN 125
+# define KEY_ARROW_LEFT 124
+# define KEY_ARROW_RIGHT 125
+# define MOUSE_SCROLL_UP 4
+# define MOUSE_SCROLL_DOWN 5
+# define KEY_ZOOM_IN 12
+# define KEY_ZOOM_OUT 14
+# define KEY_MOUSE_CAPTURE 41
+# define MOTION_NOTIFY 6
+# define POINTER_MOTION_MASK (1L<<6)
 
 /*
 ** ENUMERATIONS
@@ -69,6 +81,7 @@ typedef struct	s_fractal
 	t_fractal_type	type;
 	double			julia_x;
 	double			julia_y;
+	int				julia_capture_mouse;
 	double			min_x;
 	double			max_x;
 	double			min_y;
@@ -115,12 +128,15 @@ void		move_frame_left(t_env *env);
 void		move_frame_right(t_env *env);
 void		move_frame_up(t_env *env);
 void		move_frame_down(t_env *env);
-void		handle_key(int key, t_env *env);
-void		zoom_up(t_env *env);
-void		zoom_down(t_env *env);
+int			handle_key(int key, t_env *env);
+void		zoom_in(t_env *env);
+void		zoom_out(t_env *env);
 void		init_julia(t_env *env, double x, double y);
 void				redraw_julia(t_env *env);
 void					init_burningship(t_env *env);
 void				redraw_burningship(t_env *env);
+int		mouse_event(int event, int x, int y, void *param);
+int		mouse_pointer_event(int x, int y, void *param);
+void	change_julia_coord(int x, int y, t_env *env);
 
 #endif

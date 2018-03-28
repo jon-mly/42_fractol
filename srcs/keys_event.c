@@ -12,19 +12,25 @@
 
 #include "fractol.h"
 
-void		handle_key(int key, t_env *env)
+int			handle_key(int key, t_env *env)
 {
-	if (key == 123)
+	printf("%d\n", key);
+	if (key == KEY_ARROW_LEFT)
 		move_frame_left(env);
-	else if (key == 124)
+	else if (key == KEY_ARROW_RIGHT)
 		move_frame_right(env);
-	else if (key == 126)
+	else if (key == KEY_ARROW_DOWN)
 		move_frame_up(env);
-	else if (key == 125)
+	else if (key == KEY_ARROW_UP)
 		move_frame_down(env);
-	else if (key == 12)
-		zoom_up(env);
-	else if (key == 14)
-		zoom_down(env);
+	else if (key == KEY_ZOOM_IN)
+		zoom_in(env);
+	else if (key == KEY_ZOOM_OUT)
+		zoom_out(env);
+	else if (key == KEY_MOUSE_CAPTURE && env->fractal.type == JULIA)
+		env->fractal.julia_capture_mouse = !env->fractal.julia_capture_mouse;
+	else
+		return (0);
 	redraw_image(env);
+	return (0);
 }

@@ -39,7 +39,7 @@ static void		set_iterations_count(t_env *env)
 	env->fractal.max_iteration = max_iter;
 }
 
-void		zoom_up(t_env *env)
+void		zoom_in(t_env *env)
 {
 	double	shift;
 
@@ -54,7 +54,7 @@ void		zoom_up(t_env *env)
 	set_iterations_count(env);
 }
 
-void		zoom_down(t_env *env)
+void		zoom_out(t_env *env)
 {
 	double	shift;
 

@@ -30,10 +30,9 @@ int		deal_with_key(int key, void *param)
 	t_env		*env;
 
 	env = (t_env*)param;
-	if (key == 53)
+	if (key == KEY_ESC)
 		exit_normally(env);
-	else if (key == 123 || key == 124 || key == 125 || key == 126 || key == 14
-			|| key == 12)
+	else
 		handle_key(key, env);
 	return (0);
 }
@@ -49,9 +48,11 @@ int		main(int ac, char** av)
 			"fractol");
 	env->win_length = WIN_LENGTH;
 	env->win_height = WIN_HEIGHT;
-	init_burningship(env);
+	init_julia(env, 0, 0);
 	redraw_image(env);
 	mlx_key_hook(env->win_ptr, deal_with_key, (void*)env);
+	mlx_mouse_hook(env->win_ptr, mouse_event, (void*)env);
+	mlx_hook(env->win_ptr, MOTION_NOTIFY, POINTER_MOTION_MASK, mouse_pointer_event, (void*)env);
 	mlx_loop(env->mlx_ptr);
 	return (0);
 }
