@@ -37,10 +37,25 @@ int		deal_with_key(int key, void *param)
 	return (0);
 }
 
+static void		init_fractal(char *key, t_env *env)
+{
+	if (ft_strequ(key, "mandelbrot"))
+		init_mandelbrot(env);
+	else if (ft_strequ(key, "julia"))
+		init_julia(env, 0, 0);
+	else if (ft_strequ(key, "burningship"))
+		init_burningship(env);
+}
+
 int		main(int ac, char** av)
 {
 	t_env		*env;
 
+	if (ac != 2)
+		exit_usage();
+	if (!ft_strequ(av[1], "mandelbrot") && !ft_strequ(av[1], "julia")
+		&& !ft_strequ(av[1], "burningship"))
+		exit_usage();
 	if (!(env = init_environment()))
 		exit_error(env);
 	env->mlx_ptr = mlx_init();
@@ -48,7 +63,7 @@ int		main(int ac, char** av)
 			"fractol");
 	env->win_length = WIN_LENGTH;
 	env->win_height = WIN_HEIGHT;
-	init_julia(env, 0, 0);
+	init_fractal(av[1], env);
 	redraw_image(env);
 	mlx_key_hook(env->win_ptr, deal_with_key, (void*)env);
 	mlx_mouse_hook(env->win_ptr, mouse_event, (void*)env);

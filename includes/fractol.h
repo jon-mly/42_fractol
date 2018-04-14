@@ -32,7 +32,7 @@
 # define KEY_ARROW_UP 126
 # define KEY_ARROW_DOWN 125
 # define KEY_ARROW_LEFT 124
-# define KEY_ARROW_RIGHT 125
+# define KEY_ARROW_RIGHT 123
 # define MOUSE_SCROLL_UP 4
 # define MOUSE_SCROLL_DOWN 5
 # define KEY_ZOOM_IN 12
@@ -120,6 +120,7 @@ t_color		color_from(unsigned char r, unsigned char g, unsigned char b);
 void		fill_pixel(t_env *env, int x, int y, t_color color);
 void		exit_error(t_env *env);
 void		exit_normally(t_env *env);
+void		exit_usage(void);
 void				redraw_mandelbrot(t_env *env);
 void					init_mandelbrot(t_env *env);
 void		redraw_image(t_env *env);

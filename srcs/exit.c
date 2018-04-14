@@ -23,6 +23,12 @@ void		exit_error(t_env *env)
 	exit(0);
 }
 
+void		exit_usage(void)
+{
+	ft_putendl("Usage : mandelbrot/julia/burningship");
+	exit(0);
+}
+
 void		exit_normally(t_env *env)
 {
 	if (env->img_ptr)
