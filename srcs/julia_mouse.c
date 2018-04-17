@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   julia_mouse.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/17 16:27:19 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/04/17 16:34:48 by jmlynarc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 void	change_julia_coord(int x, int y, t_env *env)
@@ -10,4 +22,3 @@ void	change_julia_coord(int x, int y, t_env *env)
 	env->fractal.julia_x = julia_x;
 	env->fractal.julia_y = julia_y;
 }
-

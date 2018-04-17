@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 14:33:31 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/03/16 15:59:30 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:25:23 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int				iterate(double x, double y, t_env *env)
 	return (i);
 }
 
-static void			*draw_lines(void *arg)
+static void				*draw_lines(void *arg)
 {
 	t_thread_data	data;
 	int				x;
@@ -55,7 +55,6 @@ static void			*draw_lines(void *arg)
 	int				iterations;
 
 	data = *((t_thread_data*)arg);
-	printf("Zoom : %f\n", data.env->zoom);
 	y = data.y_min - 1;
 	while (++y < data.y_max)
 	{
@@ -75,7 +74,7 @@ static void			*draw_lines(void *arg)
 	return (NULL);
 }
 
-static t_thread_data			*thread_data(t_env *env, int thread_rank,
+static t_thread_data	*thread_data(t_env *env, int thread_rank,
 		int total_threads)
 {
 	t_thread_data	*data;
@@ -88,20 +87,24 @@ static t_thread_data			*thread_data(t_env *env, int thread_rank,
 	return (data);
 }
 
-void				redraw_mandelbrot(t_env *env)
+void					redraw_mandelbrot(t_env *env)
 {
 	pthread_t	thread_0;
 	pthread_t	thread_1;
 	pthread_t	thread_2;
 	pthread_t	thread_3;
 
-	if (pthread_create(&thread_0, NULL, draw_lines, (void*)(thread_data(env, 0, 4))))
+	if (pthread_create(&thread_0, NULL, draw_lines,
+				(void*)(thread_data(env, 0, 4))))
 		exit_error(env);
-	if (pthread_create(&thread_1, NULL, draw_lines, (void*)(thread_data(env, 1, 4))))
+	if (pthread_create(&thread_1, NULL, draw_lines,
+				(void*)(thread_data(env, 1, 4))))
 		exit_error(env);
-	if (pthread_create(&thread_2, NULL, draw_lines, (void*)(thread_data(env, 2, 4))))
+	if (pthread_create(&thread_2, NULL, draw_lines,
+				(void*)(thread_data(env, 2, 4))))
 		exit_error(env);
-	if (pthread_create(&thread_3, NULL, draw_lines, (void*)(thread_data(env, 3, 4))))
+	if (pthread_create(&thread_3, NULL, draw_lines,
+				(void*)(thread_data(env, 3, 4))))
 		exit_error(env);
 	pthread_join(thread_0, NULL);
 	pthread_join(thread_1, NULL);

@@ -6,13 +6,13 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 15:01:30 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/03/16 16:09:28 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:24:52 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_env		*init_environment()
+t_env			*init_environment(void)
 {
 	t_env		*env;
 
@@ -25,7 +25,7 @@ t_env		*init_environment()
 	return (env);
 }
 
-int		deal_with_key(int key, void *param)
+int				deal_with_key(int key, void *param)
 {
 	t_env		*env;
 
@@ -47,7 +47,7 @@ static void		init_fractal(char *key, t_env *env)
 		init_burningship(env);
 }
 
-int		main(int ac, char** av)
+int				main(int ac, char **av)
 {
 	t_env		*env;
 
@@ -67,7 +67,8 @@ int		main(int ac, char** av)
 	redraw_image(env);
 	mlx_key_hook(env->win_ptr, deal_with_key, (void*)env);
 	mlx_mouse_hook(env->win_ptr, mouse_event, (void*)env);
-	mlx_hook(env->win_ptr, MOTION_NOTIFY, POINTER_MOTION_MASK, mouse_pointer_event, (void*)env);
+	mlx_hook(env->win_ptr, MOTION_NOTIFY, POINTER_MOTION_MASK,
+			mouse_pointer_event, (void*)env);
 	mlx_loop(env->mlx_ptr);
 	return (0);
 }

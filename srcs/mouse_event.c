@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mouse_event.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/17 16:26:09 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/04/17 16:26:15 by jmlynarc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 int		mouse_event(int event, int x, int y, void *param)
@@ -28,4 +40,5 @@ int		mouse_pointer_event(int x, int y, void *param)
 		return (0);
 	change_julia_coord(x, y, env);
 	redraw_image(env);
+	return (0);
 }

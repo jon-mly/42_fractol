@@ -6,11 +6,12 @@
 #    By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/01 14:51:15 by jmlynarc          #+#    #+#              #
-#    Updated: 2018/03/16 12:55:03 by jmlynarc         ###   ########.fr        #
+#    Updated: 2018/04/17 16:20:51 by jmlynarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
+ASSOCIATED_REP = $(NAME).dSYM
 
 LIBFT_REP = libft/
 LIBFT = libft/libft.a
@@ -43,19 +44,22 @@ MULTITHREADING_FLAG = -lpthread
 
 MATH_FLAG = -lm
 
+%.o: %.c
+	@gcc $(W_FLAGS) -c $< -o $@
+
 $(NAME):
-	cd $(LIBFT_REP) && make
+	make -C $(LIBFT_REP)
 	gcc $(INCLUDE_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(MULTITHREADING_FLAG) \
 		$(SRCS) $(LIBFT) -o $(NAME)
 
 all: $(NAME)
 
 clean:
-	cd $(LIBFT_REP) && make clean
+	make clean -C $(LIBFT_REP)
 	rm -rf $(O_SRCS)
 
 fclean: clean
-	cd $(LIBFT_REP) && make fclean
-	rm -rf $(NAME)
+	make fclean -C $(LIBFT_REP)
+	rm -rf $(NAME) $(ASSOCIATED_REP)
 
 re: fclean all

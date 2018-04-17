@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 14:46:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/03/16 11:56:12 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:21:26 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int			handle_key(int key, t_env *env)
 {
-	printf("%d\n", key);
 	if (key == KEY_ARROW_LEFT)
 		move_frame_left(env);
 	else if (key == KEY_ARROW_RIGHT)

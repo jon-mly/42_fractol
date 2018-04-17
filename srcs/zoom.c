@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 11:47:41 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/03/16 15:54:46 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:22:59 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		set_iterations_count(t_env *env)
 	env->fractal.max_iteration = max_iter;
 }
 
-void		zoom_in(t_env *env)
+void			zoom_in(t_env *env)
 {
 	double	shift;
 
@@ -50,11 +50,10 @@ void		zoom_in(t_env *env)
 	env->fractal.max_y -= shift;
 	env->zoom = (double)(env->win_length) / (double)(env->fractal.max_x -
 				env->fractal.min_x);
-	// TODO: modify number of iterations
 	set_iterations_count(env);
 }
 
-void		zoom_out(t_env *env)
+void			zoom_out(t_env *env)
 {
 	double	shift;
 
@@ -65,6 +64,5 @@ void		zoom_out(t_env *env)
 	env->fractal.max_y += shift;
 	env->zoom = (double)(env->win_length) / (double)(env->fractal.max_x -
 				env->fractal.min_x);
-	// TODO: modify number of iterations
 	set_iterations_count(env);
 }

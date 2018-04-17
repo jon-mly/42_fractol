@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 14:51:21 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/03/16 16:09:04 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:35:32 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,28 +116,28 @@ typedef struct	s_thread_data
 ** PROTOTYPES
 */
 
-t_color		color_from(unsigned char r, unsigned char g, unsigned char b);
-void		fill_pixel(t_env *env, int x, int y, t_color color);
-void		exit_error(t_env *env);
-void		exit_normally(t_env *env);
-void		exit_usage(void);
-void				redraw_mandelbrot(t_env *env);
-void					init_mandelbrot(t_env *env);
-void		redraw_image(t_env *env);
-t_color		mixed_color(double proportion);
-void		move_frame_left(t_env *env);
-void		move_frame_right(t_env *env);
-void		move_frame_up(t_env *env);
-void		move_frame_down(t_env *env);
-int			handle_key(int key, t_env *env);
-void		zoom_in(t_env *env);
-void		zoom_out(t_env *env);
-void		init_julia(t_env *env, double x, double y);
-void				redraw_julia(t_env *env);
-void					init_burningship(t_env *env);
-void				redraw_burningship(t_env *env);
-int		mouse_event(int event, int x, int y, void *param);
-int		mouse_pointer_event(int x, int y, void *param);
-void	change_julia_coord(int x, int y, t_env *env);
+t_color			color_from(unsigned char r, unsigned char g, unsigned char b);
+void			fill_pixel(t_env *env, int x, int y, t_color color);
+void			exit_error(t_env *env);
+void			exit_normally(t_env *env);
+void			exit_usage(void);
+void			redraw_mandelbrot(t_env *env);
+void			init_mandelbrot(t_env *env);
+void			redraw_image(t_env *env);
+t_color			mixed_color(double proportion);
+void			move_frame_left(t_env *env);
+void			move_frame_right(t_env *env);
+void			move_frame_up(t_env *env);
+void			move_frame_down(t_env *env);
+int				handle_key(int key, t_env *env);
+void			zoom_in(t_env *env);
+void			zoom_out(t_env *env);
+void			init_julia(t_env *env, double x, double y);
+void			redraw_julia(t_env *env);
+void			init_burningship(t_env *env);
+void			redraw_burningship(t_env *env);
+int				mouse_event(int event, int x, int y, void *param);
+int				mouse_pointer_event(int x, int y, void *param);
+void			change_julia_coord(int x, int y, t_env *env);
 
 #endif
