@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 14:33:31 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 16:25:23 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/05/23 13:15:20 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,32 @@
 
 void					init_mandelbrot(t_env *env)
 {
+	double		proportion;
+
 	env->fractal.type = MANDELBROT;
 	env->fractal.max_iteration = 50;
 	env->fractal.min_x = -2.1;
 	env->fractal.max_x = 0.6;
-	env->fractal.min_y = -1.2;
-	env->fractal.max_y = 1.2;
+	proportion = (env->fractal.max_x - env->fractal.min_x) / WIN_LENGTH;
+	env->fractal.min_y = -(proportion * WIN_HEIGHT) / 2;  //-1.2;
+	env->fractal.max_y = -env->fractal.min_y;
 	env->zoom = (double)(env->win_length) / (double)(env->fractal.max_x -
 				env->fractal.min_x);
 }
 
-static int				iterate(double x, double y, t_env *env)
+/*
+** Returns the number of iterations that have been done before reaching a limit
+** for the suite. The value returned is slightly adjusted to also consider the
+** last complex value iterated (if over 4). It allows to draw a smoother
+** gradient.
+*/
+
+static double				iterate(double x, double y, t_env *env)
 {
 	t_complex	c;
 	t_complex	z;
 	double		tmp;
-	int			i;
+	double		i;
 
 	c.r = x / env->zoom + env->fractal.min_x;
 	c.i = y / env->zoom + env->fractal.min_y;
@@ -42,7 +52,7 @@ static int				iterate(double x, double y, t_env *env)
 		z.r = z.r * z.r - z.i * z.i + c.r;
 		z.i = 2 * z.i * tmp + c.i;
 		if (z.r * z.r + z.i * z.i > 4)
-			return (i);
+			return (i + 1 - log(log(sqrt(z.r * z.r + z.i * z.i))) / log(2));
 	}
 	return (i);
 }
@@ -52,7 +62,7 @@ static void				*draw_lines(void *arg)
 	t_thread_data	data;
 	int				x;
 	int				y;
-	int				iterations;
+	double			iterations;
 
 	data = *((t_thread_data*)arg);
 	y = data.y_min - 1;
@@ -65,7 +75,7 @@ static void				*draw_lines(void *arg)
 			if (iterations > data.env->fractal.max_iteration)
 				fill_pixel(data.env, x, y, color_from(255, 255, 255));
 			else
-				fill_pixel(data.env, x, y, mixed_color((double)iterations /
+				fill_pixel(data.env, x, y, mixed_color(iterations /
 					(double)data.env->fractal.max_iteration));
 		}
 	}

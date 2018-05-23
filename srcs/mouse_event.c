@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 16:26:09 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/23 11:32:46 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/05/23 13:25:35 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int		mouse_event(int event, int x, int y, void *param)
 	(void)y;
 	env = (t_env *)param;
 	if (event == MOUSE_SCROLL_UP)
-		zoom_out(env);
+		zoom_out_mouse(env);
 	else if (event == MOUSE_SCROLL_DOWN)
-		zoom_in(env);
+		zoom_in_mouse(env);
 	else
 		return (0);
 	redraw_image(env);

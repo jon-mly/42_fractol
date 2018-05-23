@@ -6,17 +6,19 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 14:46:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 16:21:26 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/05/23 12:51:12 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+# include <stdio.h>
+
 int			handle_key(int key, t_env *env)
 {
-	if (key == KEY_ARROW_LEFT)
+	if (key == KEY_ARROW_RIGHT)
 		move_frame_left(env);
-	else if (key == KEY_ARROW_RIGHT)
+	else if (key == KEY_ARROW_LEFT)
 		move_frame_right(env);
 	else if (key == KEY_ARROW_DOWN)
 		move_frame_up(env);

@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 11:47:41 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 16:22:59 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/05/23 13:19:30 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ void			zoom_in(t_env *env)
 {
 	double	shift;
 
+	shift = (0.1 * (env->fractal.max_y - env->fractal.min_y)) / 2;
+	env->fractal.min_y += shift;
+	env->fractal.max_y -= shift;
 	shift = (0.1 * (env->fractal.max_x - env->fractal.min_x)) / 2;
 	env->fractal.min_x += shift;
-	env->fractal.min_y += shift;
 	env->fractal.max_x -= shift;
-	env->fractal.max_y -= shift;
 	env->zoom = (double)(env->win_length) / (double)(env->fractal.max_x -
 				env->fractal.min_x);
 	set_iterations_count(env);
@@ -57,11 +58,42 @@ void			zoom_out(t_env *env)
 {
 	double	shift;
 
+	shift = (0.1 * (env->fractal.max_y - env->fractal.min_y)) / 2;
+	env->fractal.min_y -= shift;
+	env->fractal.max_y += shift;
 	shift = (0.1 * (env->fractal.max_x - env->fractal.min_x)) / 2;
 	env->fractal.min_x -= shift;
-	env->fractal.min_y -= shift;
 	env->fractal.max_x += shift;
+	env->zoom = (double)(env->win_length) / (double)(env->fractal.max_x -
+				env->fractal.min_x);
+	set_iterations_count(env);
+}
+
+void			zoom_in_mouse(t_env *env, int x, int y)
+{
+	double	shift;
+
+	shift = (0.1 * (env->fractal.max_y - env->fractal.min_y)) / 2;
+	env->fractal.min_y += shift;
+	env->fractal.max_y -= shift;
+	shift = (0.1 * (env->fractal.max_x - env->fractal.min_x)) / 2;
+	env->fractal.min_x += shift;
+	env->fractal.max_x -= shift;
+	env->zoom = (double)(env->win_length) / (double)(env->fractal.max_x -
+				env->fractal.min_x);
+	set_iterations_count(env);
+}
+
+void			zoom_out_mouse(t_env *env, int x, int y)
+{
+	double	shift;
+
+	shift = (0.1 * (env->fractal.max_y - env->fractal.min_y)) / 2;
+	env->fractal.min_y -= shift;
 	env->fractal.max_y += shift;
+	shift = (0.1 * (env->fractal.max_x - env->fractal.min_x)) / 2;
+	env->fractal.min_x -= shift;
+	env->fractal.max_x += shift;
 	env->zoom = (double)(env->win_length) / (double)(env->fractal.max_x -
 				env->fractal.min_x);
 	set_iterations_count(env);

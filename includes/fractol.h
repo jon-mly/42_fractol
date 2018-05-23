@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 14:51:21 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/23 11:32:22 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/05/23 13:12:19 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 ** MACROS
 */
 
-# define WIN_LENGTH 1200
-# define WIN_HEIGHT 1200
+# define WIN_LENGTH 1600
+# define WIN_HEIGHT 900
 # define KEY_ESC 53
 # define KEY_ARROW_UP 126
 # define KEY_ARROW_DOWN 125
