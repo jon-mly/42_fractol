@@ -6,7 +6,7 @@
 #    By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/01 14:51:15 by jmlynarc          #+#    #+#              #
-#    Updated: 2018/04/17 16:20:51 by jmlynarc         ###   ########.fr        #
+#    Updated: 2018/05/23 11:30:55 by jmlynarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,21 +19,23 @@ LIBFT = libft/libft.a
 INCLUDE_FLAG = -I includes/
 
 SRCS_REP = srcs/
-SRCS = $(SRCS_REP)color.c \
-	   $(SRCS_REP)draw.c \
-	   $(SRCS_REP)exit.c \
-	   $(SRCS_REP)julia.c \
-	   $(SRCS_REP)keys_event.c \
-	   $(SRCS_REP)main.c \
-	   $(SRCS_REP)mandelbrot.c \
-	   $(SRCS_REP)graphic_manager.c \
-	   $(SRCS_REP)move_frame.c \
-	   $(SRCS_REP)zoom.c \
-	   $(SRCS_REP)burningship.c \
-	   $(SRCS_REP)mouse_event.c \
-	   $(SRCS_REP)julia_mouse.c
+SRCS = color.c \
+		draw.c \
+		exit.c \
+		julia.c \
+		keys_event.c \
+		main.c \
+		mandelbrot.c \
+		graphic_manager.c \
+		move_frame.c \
+		zoom.c \
+		burningship.c \
+		mouse_event.c \
+		julia_mouse.c
 
-O_SRCS = $(SRCS:.c=.o)
+SRC = $(addprefix $(SRCS_REP), $(SRCS))
+
+O_SRCS = $(SRC:.c=.o)
 
 W_FLAGS = -Wall -Werror -Wextra
 
@@ -45,12 +47,12 @@ MULTITHREADING_FLAG = -lpthread
 MATH_FLAG = -lm
 
 %.o: %.c
-	@gcc $(W_FLAGS) -c $< -o $@
+	@gcc $(W_FLAGS) $(INCLUDE_FLAG) -c $< -o $@
 
-$(NAME):
+$(NAME): $(O_SRCS)
 	make -C $(LIBFT_REP)
 	gcc $(INCLUDE_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(MULTITHREADING_FLAG) \
-		$(SRCS) $(LIBFT) -o $(NAME)
+		$(SRC) $(LIBFT) -o $(NAME)
 
 all: $(NAME)
 
