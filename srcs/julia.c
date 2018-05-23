@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 14:33:29 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/23 12:59:57 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/05/23 14:29:43 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void					init_julia(t_env *env, double x, double y)
 {
+	double		proportion;
+
 	env->fractal.type = JULIA;
 	env->fractal.max_iteration = 50;
 	env->fractal.min_x = -2.1;
 	env->fractal.max_x = 0.6;
-	env->fractal.min_y = -1.2;
-	env->fractal.max_y = 1.2;
+	proportion = (env->fractal.max_x - env->fractal.min_x) / WIN_LENGTH;
+	env->fractal.min_y = -(proportion * WIN_HEIGHT) / 2;
+	env->fractal.max_y = (proportion * WIN_HEIGHT) / 2;
 	env->fractal.julia_x = x;
 	env->fractal.julia_y = y;
 	env->fractal.julia_capture_mouse = 0;

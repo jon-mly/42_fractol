@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 14:51:21 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/23 13:12:19 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/05/23 15:08:19 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@
 # define KEY_MOUSE_CAPTURE 41
 # define MOTION_NOTIFY 6
 # define POINTER_MOTION_MASK (1L<<6)
+
+# define WHITE color_from(255, 255, 255)
+# define BLUE color_from(0, 40, 255)
+# define RED color_from(255, 20, 0)
+# define BLACK color_from(0, 0, 0)
+# define ORANGE color_from(255, 99, 71)
 
 /*
 ** ENUMERATIONS
@@ -131,7 +137,9 @@ void			move_frame_up(t_env *env);
 void			move_frame_down(t_env *env);
 int				handle_key(int key, t_env *env);
 void			zoom_in(t_env *env);
+void			zoom_in_mouse(t_env *env, int x, int y);
 void			zoom_out(t_env *env);
+void			zoom_out_mouse(t_env *env, int x, int y);
 void			init_julia(t_env *env, double x, double y);
 void			redraw_julia(t_env *env);
 void			init_burningship(t_env *env);

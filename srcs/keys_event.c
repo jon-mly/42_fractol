@@ -6,13 +6,11 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 14:46:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/23 12:51:12 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/05/23 14:28:39 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-# include <stdio.h>
 
 int			handle_key(int key, t_env *env)
 {
