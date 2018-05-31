@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 16:51:30 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/23 15:15:55 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/05/31 16:22:48 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_color		color_from(unsigned char r, unsigned char g, unsigned char b)
 	color.r = r;
 	color.g = g;
 	color.b = b;
-	color.a = 0;
+	color.a = 1;
 	return (color);
 }
 
@@ -38,11 +38,11 @@ t_color		mixed_color(double proportion)
 	if (proportion < 0.25)
 		return (mix_colors(RED, ORANGE, proportion * 4));
 	else if (proportion < 0.5)
-		return (mix_colors(ORANGE, BLACK, (proportion - 0.25) * 4));
+		return (mix_colors(ORANGE, WHITE, (proportion - 0.25) * 4));
 	else if (proportion < 0.75)
-		return (mix_colors(BLACK, BLUE, (proportion - 0.5) * 4));
+		return (mix_colors(WHITE, BLUE, (proportion - 0.5) * 4));
 	else
-		return (mix_colors(BLUE, WHITE, (proportion - 0.75) * 2));
+		return (mix_colors(BLUE, BLACK, (proportion - 0.75) * 4));
 }
 
 int			endian_color(unsigned int r, unsigned g, unsigned int b)

@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 14:33:31 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/23 15:11:31 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/05/31 16:08:14 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void				*draw_lines(void *arg)
 		{
 			iterations = iterate((double)(x), (double)(y), data.env);
 			if (iterations > data.env->fractal.max_iteration)
-				fill_pixel(data.env, x, y, WHITE);
+				fill_pixel(data.env, x, y, BLACK);
 			else
 				fill_pixel(data.env, x, y, mixed_color(iterations /
 					(double)data.env->fractal.max_iteration));
@@ -99,18 +99,6 @@ static t_thread_data	*thread_data(t_env *env, int thread_rank,
 
 void					redraw_mandelbrot(t_env *env)
 {
-	/*
-	pthread_t	thread;
-	int			i;
-
-	i = -1;
-	while (++i < 4)
-	{
-		if (pthread_create(&thread, NULL, draw_lines, (void*)thread_data(env, i, 4)))
-			exit_error(env);
-		pthread_join(thread, NULL);
-	}
-	*/
 	pthread_t	thread_0;
 	pthread_t	thread_1;
 	pthread_t	thread_2;
