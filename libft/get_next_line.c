@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/17 16:32:48 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 16:33:58 by jmlynarc         ###   ########.fr       */
+/*   Created: 2018/01/24 14:16:31 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/05/23 11:02:06 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int			extend_line(t_buffer *buffer, char **line)
 	char		*tmp;
 	int			index;
 
-	if (ft_strchr(buffer->str, '\n'))
-		index = (int)(ft_strchr(buffer->str, '\n') - buffer->str);
+	if (ft_strchr(buffer->str, EOL))
+		index = (int)(ft_strchr(buffer->str, EOL) - buffer->str);
 	else
 		index = BUFF_SIZE;
 	buffer->str[index] = '\0';
@@ -54,6 +54,7 @@ int			extend_line(t_buffer *buffer, char **line)
 	if (index < BUFF_SIZE)
 	{
 		ft_memmove(buffer->str, buffer->str + index + 1, BUFF_SIZE - index);
+		ft_memset(buffer->str + BUFF_SIZE - index, '\0', index);
 		return (1);
 	}
 	ft_memset(buffer->str, '\0', BUFF_SIZE);
@@ -62,7 +63,7 @@ int			extend_line(t_buffer *buffer, char **line)
 
 int			find_carriage_return(t_buffer *buffer, char **line)
 {
-	if (ft_strchr(buffer->str, '\n'))
+	if (ft_strchr(buffer->str, EOL))
 	{
 		extend_line(buffer, line);
 		return (1);
@@ -84,9 +85,12 @@ int			get_next_line(const int fd, char **line)
 	if (ft_strlen(buffer->str) > 0 && find_carriage_return(buffer, line))
 		return (1);
 	while ((res = read(fd, buffer->str, BUFF_SIZE)) > 0 &&
-			ft_strchr(buffer->str, '\n') == NULL)
+			ft_strchr(buffer->str, EOL) == NULL)
+	{
+		buffer->str[res] = '\0';
 		extend_line(buffer, line);
-	if (ft_strchr(buffer->str, '\n'))
+	}
+	if (ft_strchr(buffer->str, EOL))
 	{
 		extend_line(buffer, line);
 		return (1);

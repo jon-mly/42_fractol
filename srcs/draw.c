@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 15:55:59 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/31 16:23:57 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/17 13:26:19 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void		fill_pixel(t_env *env, int x, int y, t_color color)
 		env->img_str[i] = color.r;
 		env->img_str[i + 1] = color.g;
 		env->img_str[i + 2] = color.b;
-		env->img_str[i + 3] = 0;//color.a;
+		env->img_str[i + 3] = 0;
 	}
 }

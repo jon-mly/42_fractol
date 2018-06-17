@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 14:23:48 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/03/10 17:19:59 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/17 13:28:44 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		exit_error(t_env *env)
 
 void		exit_usage(void)
 {
-	ft_putendl("Usage : mandelbrot/julia/burningship");
+	ft_putendl("Usage : ./fractol [mandelbrot/julia/burningship]");
 	exit(0);
 }
 

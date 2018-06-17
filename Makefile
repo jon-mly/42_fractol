@@ -6,7 +6,7 @@
 #    By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/01 14:51:15 by jmlynarc          #+#    #+#              #
-#    Updated: 2018/05/31 16:14:07 by jmlynarc         ###   ########.fr        #
+#    Updated: 2018/06/17 16:47:31 by jmlynarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ MLX_FLAGS = -I ~/Library -g -L ~/Library -lmlx -framework OpenGL -framework \
 
 MULTITHREADING_FLAG = -lpthread
 
-DEBUG_FLAG = -fsanitize=address
+DEBUG_FLAG = -g -fsanitize=address
 
 MATH_FLAG = -lm
 

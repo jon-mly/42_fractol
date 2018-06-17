@@ -6,13 +6,13 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 16:51:30 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/31 16:22:48 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/17 13:41:04 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_color		color_from(unsigned char r, unsigned char g, unsigned char b)
+t_color			color_from(unsigned char r, unsigned char g, unsigned char b)
 {
 	t_color		color;
 
@@ -33,7 +33,7 @@ static t_color	mix_colors(t_color color1, t_color color2, double proportion)
 	return (color);
 }
 
-t_color		mixed_color(double proportion)
+t_color			mixed_color(double proportion)
 {
 	if (proportion < 0.25)
 		return (mix_colors(RED, ORANGE, proportion * 4));
@@ -45,7 +45,7 @@ t_color		mixed_color(double proportion)
 		return (mix_colors(BLUE, BLACK, (proportion - 0.75) * 4));
 }
 
-int			endian_color(unsigned int r, unsigned g, unsigned int b)
+int				endian_color(unsigned int r, unsigned g, unsigned int b)
 {
 	int			endian_color;
 

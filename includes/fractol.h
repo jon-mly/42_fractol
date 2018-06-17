@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 14:51:21 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/23 15:08:19 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/17 16:51:45 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@
 ** MACROS
 */
 
+# define THREADS 16
+
 # define WIN_LENGTH 1600
-# define WIN_HEIGHT 900
+# define WIN_HEIGHT 1200
 # define KEY_ESC 53
 # define KEY_ARROW_UP 126
 # define KEY_ARROW_DOWN 125
@@ -147,5 +149,6 @@ void			redraw_burningship(t_env *env);
 int				mouse_event(int event, int x, int y, void *param);
 int				mouse_pointer_event(int x, int y, void *param);
 void			change_julia_coord(int x, int y, t_env *env);
+void			set_iterations_count(t_env *env);
 
 #endif

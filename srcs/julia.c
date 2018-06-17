@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 14:33:29 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/23 14:29:43 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/17 17:01:52 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void					init_julia(t_env *env, double x, double y)
 	double		proportion;
 
 	env->fractal.type = JULIA;
-	env->fractal.max_iteration = 50;
 	env->fractal.min_x = -2.1;
 	env->fractal.max_x = 0.6;
 	proportion = (env->fractal.max_x - env->fractal.min_x) / WIN_LENGTH;
@@ -28,6 +27,7 @@ void					init_julia(t_env *env, double x, double y)
 	env->fractal.julia_capture_mouse = 0;
 	env->zoom = (double)(env->win_length) / (double)(env->fractal.max_x -
 				env->fractal.min_x);
+	set_iterations_count(env);
 }
 
 /*
@@ -42,6 +42,7 @@ static double			iterate(double x, double y, t_env *env)
 	t_complex	c;
 	t_complex	z;
 	double		tmp;
+	double		log_value;
 	double		i;
 
 	z.r = x / env->zoom + env->fractal.min_x;
@@ -54,8 +55,9 @@ static double			iterate(double x, double y, t_env *env)
 		tmp = z.r;
 		z.r = z.r * z.r - z.i * z.i + c.r;
 		z.i = 2 * z.i * tmp + c.i;
+		log_value = log(z.r * z.r + z.i * z.i) / 2.f;
 		if (z.r * z.r + z.i * z.i > 4)
-			return (i + 1 - log(log(sqrt(z.r * z.r + z.i * z.i))) / log(2));
+			return (i + 1 - log(log_value / log(2)) / log(2));
 	}
 	return (i);
 }
@@ -76,7 +78,7 @@ static void				*draw_lines(void *arg)
 		{
 			iterations = iterate((double)(x), (double)(y), data.env);
 			if (iterations > data.env->fractal.max_iteration)
-				fill_pixel(data.env, x, y, color_from(255, 255, 255));
+				fill_pixel(data.env, x, y, BLACK);
 			else
 				fill_pixel(data.env, x, y, mixed_color(iterations /
 					(double)data.env->fractal.max_iteration));
@@ -102,25 +104,17 @@ static t_thread_data	*thread_data(t_env *env, int thread_rank,
 
 void					redraw_julia(t_env *env)
 {
-	pthread_t	thread_0;
-	pthread_t	thread_1;
-	pthread_t	thread_2;
-	pthread_t	thread_3;
+	pthread_t	threads[THREADS];
+	int			i;
 
-	if (pthread_create(&thread_0, NULL, draw_lines,
-				(void*)(thread_data(env, 0, 4))))
-		exit_error(env);
-	if (pthread_create(&thread_1, NULL, draw_lines,
-				(void*)(thread_data(env, 1, 4))))
-		exit_error(env);
-	if (pthread_create(&thread_2, NULL, draw_lines,
-				(void*)(thread_data(env, 2, 4))))
-		exit_error(env);
-	if (pthread_create(&thread_3, NULL, draw_lines,
-				(void*)(thread_data(env, 3, 4))))
-		exit_error(env);
-	pthread_join(thread_0, NULL);
-	pthread_join(thread_1, NULL);
-	pthread_join(thread_2, NULL);
-	pthread_join(thread_3, NULL);
+	i = -1;
+	while (++i < THREADS)
+	{
+		if (pthread_create(&threads[i], NULL, draw_lines,
+					(void*)thread_data(env, i, THREADS)))
+			exit_error(env);
+	}
+	i = -1;
+	while (++i < THREADS)
+		pthread_join(threads[i], NULL);
 }
