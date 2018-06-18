@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/10 16:51:30 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/17 13:41:04 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/18 12:56:10 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static t_color	mix_colors(t_color color1, t_color color2, double proportion)
 
 t_color			mixed_color(double proportion)
 {
+	proportion = fmax(proportion, 0);
+	proportion = fmin(proportion, 1);
 	if (proportion < 0.25)
 		return (mix_colors(RED, ORANGE, proportion * 4));
 	else if (proportion < 0.5)
